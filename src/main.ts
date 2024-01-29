@@ -45,7 +45,7 @@ elem?.appendChild(mycanvas) ;
 const controls = createOrbitControls(camera, mycanvas);
 const loders = createLoaders(renderer);
 const loader = loders.loader;
-// const ktx2Loader = loders.ktx2Loader;
+const ktx2loader = loders.ktx2Loader ; 
 const dayNightToggle = document.getElementById('dayNightToggle');
 let isDayMode = false; // Initial mode is day
 setupHDRI();
@@ -59,10 +59,12 @@ function loadModels(index: number) {
   if (index >= modelPaths.length) {
     progressContainer.style.display = 'none';
     composer.setSize(window.innerWidth * 0.75, window.innerHeight);
-    processJSON1(loadedModelsMap['Sofa'] , '.dynamic-mate' ) ; 
-    processJSON2(loadedModelsMap['Floor'] , '.dynamic-mate-floor') ; 
-    processJSON3(loadedModelsMap['Carpet'] , '.dynamic-mate-carpet') ; 
+    processJSON1(loadedModelsMap['Sofa'] , '.dynamic-mate' , ktx2loader ) ; 
+    processJSON2(loadedModelsMap['Floor'] , '.dynamic-mate-floor' , ktx2loader ) ; 
+    processJSON3(loadedModelsMap['Carpet'] , '.dynamic-mate-carpet' , ktx2loader ) ; 
     controlLight(scene) ; 
+    // trigger1("")
+    // trigger1("")
     //@ts-ignore
     addDelete(specificObject)
     return;
@@ -77,19 +79,19 @@ function loadModels(index: number) {
     function (gltf) {
       console.log(`Loaded model from ${modelPath}`, gltf);
       let modelName ; 
-      if( modelPath == 'models/Sofa.glb'){
+      if( modelPath == 'https://d2629xvaofl3d3.cloudfront.net/models_29_01_23/Sofa.glb'){
         modelName = 'Sofa' ; 
       }
-      else if( modelPath == 'models/Floor.glb'){
+      else if( modelPath == 'https://d2629xvaofl3d3.cloudfront.net/models_29_01_23/Floor.glb'){
         modelName = 'Floor' ; 
       }
-      else if( modelPath == 'models/Carpet.glb'){
+      else if( modelPath == 'https://d2629xvaofl3d3.cloudfront.net/models_29_01_23/Carpet.glb'){
         modelName = 'Carpet' ; 
       }
-      else if( modelPath == 'models/Window.glb'){
+      else if( modelPath == 'https://d2629xvaofl3d3.cloudfront.net/models_29_01_23/Window.glb'){
         modelName = 'Window' ; 
       }
-      else if( modelPath == 'models/Wall.glb'){
+      else if( modelPath == 'https://d2629xvaofl3d3.cloudfront.net/models_29_01_23/Wall.glb'){
         modelName = 'Wall' ; 
       }
       else{

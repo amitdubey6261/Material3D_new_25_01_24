@@ -1,10 +1,12 @@
 import * as THREE from 'three' ; 
+import { KTX2Loader } from 'three/examples/jsm/loaders/KTX2Loader';
 
-function createMaterialFromJSON(jsonData:any) {
+const  createMaterialFromJSON = async (jsonData:any , ktx2loader : KTX2Loader ) => {
     console.log(jsonData);
-    const diffuseMap = new THREE.TextureLoader().load(jsonData.diffuseMap);
-    const glossMap = new THREE.TextureLoader().load(jsonData.glossMap);
-    const normalMap = new THREE.TextureLoader().load(jsonData.normalMap);
+
+    const diffuseMap = await ktx2loader.loadAsync(jsonData.diffuseMap) ; 
+    const glossMap = await ktx2loader.loadAsync(jsonData.glossMap) ; 
+    const normalMap = await ktx2loader.loadAsync(jsonData.normalMap) ; 
 
     diffuseMap.wrapS = THREE.RepeatWrapping;
     diffuseMap.wrapT = THREE.RepeatWrapping;
@@ -21,27 +23,27 @@ function createMaterialFromJSON(jsonData:any) {
     normalMap.repeat.set(...jsonData.normalMapTiling);
 
     const material = new THREE.MeshPhysicalMaterial({
-        metalness: jsonData.metalness,
-        roughness: 1 - jsonData.sheenGloss,
-        opacity: jsonData.opacity,
-        transparent: true,
+        // metalness: jsonData.metalness,
+        // roughness: 1 - jsonData.sheenGloss,
+        // opacity: jsonData.opacity,
+        // transparent: true,
         map: diffuseMap,
         roughnessMap: glossMap,
         normalMap: normalMap,
-        side: jsonData.twoSidedLighting ? THREE.DoubleSide : THREE.FrontSide,
-        alphaTest: jsonData.alphaTest,
-        depthWrite: jsonData.depthWrite,
-        depthTest: jsonData.depthTest,
-        color: new THREE.Color(...jsonData.diffuse),
-        emissive: new THREE.Color(...jsonData.emissive),
-        emissiveIntensity: jsonData.emissiveIntensity,
-        aoMap: null,
-        aoMapIntensity: 1,
+        // side: jsonData.twoSidedLighting ? THREE.DoubleSide : THREE.FrontSide,
+        // alphaTest: jsonData.alphaTest,
+        // depthWrite: jsonData.depthWrite,
+        // depthTest: jsonData.depthTest,
+        // color: new THREE.Color(...jsonData.diffuse),
+        // emissive: new THREE.Color(...jsonData.emissive),
+        // emissiveIntensity: jsonData.emissiveIntensity,
+        // aoMap: null,
+        // aoMapIntensity: 1,
     });
 
-    material.clearcoat = jsonData.clearcoat || 0;
-    material.clearcoatRoughness = jsonData.clearcoatRoughness || 0;
-    material.reflectivity = jsonData.reflectivity || 0.5;
+    // material.clearcoat = jsonData.clearcoat || 0;
+    // material.clearcoatRoughness = jsonData.clearcoatRoughness || 0;
+    // material.reflectivity = jsonData.reflectivity || 0.5;
 
     return material;
 }

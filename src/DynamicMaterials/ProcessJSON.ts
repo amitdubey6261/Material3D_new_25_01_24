@@ -1,87 +1,54 @@
-import { collabMaterial1, collabMaterial2, collabMaterial3, trigger1, trigger2, trigger3 } from "../Collab/Material/CollabMat";
+import { KTX2Loader } from "three/examples/jsm/loaders/KTX2Loader";
+import { collabMaterial1, collabMaterial2, collabMaterial3, trigger1, trigger2, trigger3 } from "../Collab/CollabMat";
 // import { Raycaster } from "../Experience/Raycaster";
-import { createMaterialFromJSON } from "./CreateMaterial";
+// import { createMaterialFromJSON } from "./CreateMaterial";
 
-export const processJSON1 = (sofa : THREE.Object3D , className : string ) => {
+export const processJSON1 = (sofa : THREE.Object3D , className : string , ktx2loader : any ) => {
     fetch('MaterialData/SofaMaterials.json').then((res) => res.json()).then((data:any) => {
         const elems = document.querySelectorAll(className);
-        collabMaterial1(sofa , data) ; 
+        collabMaterial1(sofa , data , ktx2loader ) ; 
         Array.from(elems).map((elm) => {
             elm.addEventListener('dragend', async (e: Event) => {
                 //@ts-ignore
                 const thumbnailSelected = e.target.getAttribute('data-variant');
                 alert(thumbnailSelected)
-                const JSONMaterialData = data[thumbnailSelected] ;
-                console.log(JSONMaterialData);
-                //@ts-ignore
-                const dynamicMaterial = createMaterialFromJSON(JSONMaterialData) ; 
-                // trigger(thumbnailSelected) ; 
-                console.log(dynamicMaterial);
                 trigger1(thumbnailSelected) ; 
-
-                //@ts-ignore
-                // sofa.scene.traverse((elem)=>{
-                //     //@ts-ignore
-                //     if( elem.type == "Mesh"){
-                //         //@ts-ignore
-                //         elem.material = dynamicMaterial.clone() ;  
-                //     }
-                // })
-                console.log(sofa);
             })
         })
+        trigger1("Pink_Fabric")
     })
 }
 
-export const processJSON2 = (sofa : THREE.Object3D , className : string ) => {
+export const processJSON2 = (sofa : THREE.Object3D , className : string , ktx2Loader : KTX2Loader  ) => {
     fetch('MaterialData/SofaMaterials.json').then((res) => res.json()).then((data:any) => {
         const elems = document.querySelectorAll(className);
-        collabMaterial2(sofa , data) ; 
+        collabMaterial2(sofa , data , ktx2Loader ) ; 
         Array.from(elems).map((elm) => {
             elm.addEventListener('dragend', async (e: Event) => {
                 //@ts-ignore
                 const thumbnailSelected = e.target.getAttribute('data-variant');
                 alert(thumbnailSelected)
-                const JSONMaterialData = data[thumbnailSelected] ;
-                console.log(JSONMaterialData);
-                //@ts-ignore
-                const dynamicMaterial = createMaterialFromJSON(JSONMaterialData) ; 
-                // trigger(thumbnailSelected) ; 
-                console.log(dynamicMaterial);
                 trigger2(thumbnailSelected) ; 
-
-                //@ts-ignore
-                // sofa.scene.traverse((elem)=>{
-                //     //@ts-ignore
-                //     if( elem.type == "Mesh"){
-                //         //@ts-ignore
-                //         elem.material = dynamicMaterial.clone() ;  
-                //     }
-                // })
-                console.log(sofa);
             })
         })
+        trigger2("Laminate")
     })
 }
 
 
-export const processJSON3 = (sofa : THREE.Object3D , className : string ) => {
+export const processJSON3 = (sofa : THREE.Object3D , className : string , ktx2loader : KTX2Loader  ) => {
     fetch('MaterialData/SofaMaterials.json').then((res) => res.json()).then((data:any) => {
         const elems = document.querySelectorAll(className);
-        collabMaterial3(sofa , data) ; 
+        collabMaterial3(sofa , data , ktx2loader ) ; 
         Array.from(elems).map((elm) => {
             elm.addEventListener('dragend', async (e: Event) => {
                 //@ts-ignore
                 const thumbnailSelected = e.target.getAttribute('data-variant');
                 alert(thumbnailSelected)
-                const JSONMaterialData = data[thumbnailSelected] ;
-                console.log(JSONMaterialData);
-                //@ts-ignore
-                const dynamicMaterial = createMaterialFromJSON(JSONMaterialData) ; 
-                console.log(dynamicMaterial);
-                console.log(sofa);
                 trigger3(thumbnailSelected) ; 
             })
         })
+        trigger3("Tailored")
     })
+
 }
