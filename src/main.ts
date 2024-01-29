@@ -18,7 +18,10 @@ import { addDelete } from './Collab/Camera/CollAddDelete';
 
 
 const progressContainer = document.querySelector('.spinner-container') as HTMLElement;
+progressContainer.style.display = "block" ;
 let specificObject: THREE.Object3D | undefined;
+
+let pt_l : THREE.PointLight ; 
 
 // Function to add HDRI
 function setupHDRI() {
@@ -57,14 +60,13 @@ selectModelVariant(loadedModelsMap) ;
 // Function to load models one by one
 function loadModels(index: number) {
   if (index >= modelPaths.length) {
+    pt_l.visible = true ; 
     progressContainer.style.display = 'none';
     composer.setSize(window.innerWidth * 0.75, window.innerHeight);
     processJSON1(loadedModelsMap['Sofa'] , '.dynamic-mate' , ktx2loader ) ; 
     processJSON2(loadedModelsMap['Floor'] , '.dynamic-mate-floor' , ktx2loader ) ; 
     processJSON3(loadedModelsMap['Carpet'] , '.dynamic-mate-carpet' , ktx2loader ) ; 
     controlLight(scene) ; 
-    // trigger1("")
-    // trigger1("")
     //@ts-ignore
     addDelete(specificObject)
     return;
@@ -79,13 +81,13 @@ function loadModels(index: number) {
     function (gltf) {
       console.log(`Loaded model from ${modelPath}`, gltf);
       let modelName ; 
-      if( modelPath == 'https://d2629xvaofl3d3.cloudfront.net/models_29_01_23/Sofa.glb'){
+      if( modelPath == 'https://d2629xvaofl3d3.cloudfront.net/models_29_01_23/version2/models_29_01_24/Sofa.glb'){
         modelName = 'Sofa' ; 
       }
-      else if( modelPath == 'https://d2629xvaofl3d3.cloudfront.net/models_29_01_23/Floor.glb'){
+      else if( modelPath == 'https://d2629xvaofl3d3.cloudfront.net/models_29_01_23/version2/models_29_01_24/Floor.glb'){
         modelName = 'Floor' ; 
       }
-      else if( modelPath == 'https://d2629xvaofl3d3.cloudfront.net/models_29_01_23/Carpet.glb'){
+      else if( modelPath == 'https://d2629xvaofl3d3.cloudfront.net/models_29_01_23/version2/models_29_01_24/Carpet.glb'){
         modelName = 'Carpet' ; 
       }
       else if( modelPath == 'https://d2629xvaofl3d3.cloudfront.net/models_29_01_23/Window.glb'){
@@ -112,6 +114,8 @@ function loadModels(index: number) {
 
         if ((child as THREE.Light).isLight) {
           let l = child as THREE.PointLight;
+          pt_l = l ; 
+          l.visible = false ;
           l.castShadow = true;
           l.distance = 5;
           l.decay = 4;
@@ -127,11 +131,11 @@ function loadModels(index: number) {
       scene.add(gltf.scene);
 
       // Example: Replace material of 'FloorLamp_Cover' with subsurface scattering material
-      if (modelName === 'Floor_Lamp') {
-        const FloorLamp_Cover = 'FloorLamp_Cover';
-        const newMaterial = createSubsurfaceMaterial(); // Or any other material creation logic
-        replaceMaterial(gltf.scene, FloorLamp_Cover, newMaterial);
-      }
+      // if (modelName === 'Floor_Lamp') {
+      //   const FloorLamp_Cover = 'FloorLamp_Cover';
+      //   const newMaterial = createSubsurfaceMaterial(); // Or any other material creation logic
+      //   replaceMaterial(gltf.scene, FloorLamp_Cover, newMaterial);
+      // }
       loadModels(index + 1);
     },
     //@ts-ignore
@@ -160,7 +164,7 @@ if (dayNightToggle) {
     isDayMode = !isDayMode;
 
     // Show the spinner at the beginning
-    progressContainer.style.display = 'flex';
+    // progressContainer.style.display = 'flex';
     // Use requestAnimationFrame to ensure the spinner is rendered before proceeding
     requestAnimationFrame(() => {
       if (isDayMode) {
@@ -182,7 +186,7 @@ if (dayNightToggle) {
             });
           }
         }
-        progressContainer.style.display = 'none';
+        // progressContainer.style.display = 'none';
       } else {
 
         removeDirectionalLight(scene);
@@ -202,7 +206,7 @@ if (dayNightToggle) {
             });
           }
         }
-        progressContainer.style.display = 'none';
+        // progressContainer.style.display = 'none';
       }
     });
   });
@@ -210,8 +214,8 @@ if (dayNightToggle) {
 
 
 const createCollaborationSession = () => {
-  // const rm = "all" ;  
-  const rm = prompt('Enter') as string;
+  const rm = "all" ;  
+  // const rm = prompt('Enter') as string;
   CreateCollaborationConnection(rm);
   const camCollab = new CamCollab(camera, mycanvas, controls);
   camCollab.activateSync();

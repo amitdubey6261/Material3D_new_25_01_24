@@ -134,7 +134,8 @@ body {
 
 /* Spinner container */
 .spinner-container {
-  position: fixed;
+  z-index: 100;
+  position: absolute;
   top: 40%;
   left: 35%;
   display: flex;

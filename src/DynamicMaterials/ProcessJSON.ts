@@ -15,7 +15,7 @@ export const processJSON1 = (sofa : THREE.Object3D , className : string , ktx2lo
                 trigger1(thumbnailSelected) ; 
             })
         })
-        trigger1("Pink_Fabric")
+        // trigger1("Pink_Fabric")
     })
 }
 
@@ -31,7 +31,7 @@ export const processJSON2 = (sofa : THREE.Object3D , className : string , ktx2Lo
                 trigger2(thumbnailSelected) ; 
             })
         })
-        trigger2("Laminate")
+        // trigger2("Laminate")
     })
 }
 
@@ -48,7 +48,6 @@ export const processJSON3 = (sofa : THREE.Object3D , className : string , ktx2lo
                 trigger3(thumbnailSelected) ; 
             })
         })
-        trigger3("Tailored")
     })
 
 }
