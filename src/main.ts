@@ -15,6 +15,7 @@ import { Raycaster } from './Experience/Raycaster';
 import { processJSON1 , processJSON2, processJSON3 } from './DynamicMaterials/ProcessJSON';
 import { controlLight } from './Collab/Camera/CollLights';
 import { addDelete } from './Collab/Camera/CollAddDelete';
+import { undoManager } from './Collab/Camera/UndoRedo';
 
 
 const progressContainer = document.querySelector('.spinner-container') as HTMLElement;
@@ -68,7 +69,8 @@ function loadModels(index: number) {
     processJSON3(loadedModelsMap['Carpet'] , '.dynamic-mate-carpet' , ktx2loader ) ; 
     controlLight(scene) ; 
     //@ts-ignore
-    addDelete(specificObject)
+    addDelete(specificObject) ; 
+    undoManager() ; 
     return;
   }
 
@@ -89,6 +91,12 @@ function loadModels(index: number) {
       }
       else if( modelPath == 'https://d2629xvaofl3d3.cloudfront.net/models_29_01_23/version2/models_29_01_24/Carpet.glb'){
         modelName = 'Carpet' ; 
+      }
+      else if( modelPath == 'https://d2629xvaofl3d3.cloudfront.net/models_29_01_23/version2/models_29_01_24/Coffee_Table.glb'){
+        modelName = 'Coffee_Table' ; 
+      }
+      else if( modelPath == 'https://d2629xvaofl3d3.cloudfront.net/models_29_01_23/version2/models_29_01_24/Wall.glb'){
+        modelName = 'Coffee_Table' ; 
       }
       else if( modelPath == 'https://d2629xvaofl3d3.cloudfront.net/models_29_01_23/Window.glb'){
         modelName = 'Window' ; 

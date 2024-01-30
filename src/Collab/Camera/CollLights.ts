@@ -1,8 +1,8 @@
 import { ydoc } from "../Collab";
 
-const controlLight = (scene: THREE.Scene) => {
+const lightMap = ydoc.getMap('LightMap');
 
-    const lightMap = ydoc.getMap('LightMap');
+const controlLight = (scene: THREE.Scene) => {
 
     lightMap.set('lamp_params', {
         switch: true,
@@ -78,4 +78,4 @@ const controlLight = (scene: THREE.Scene) => {
 
 }
 
-export { controlLight }; 
+export { controlLight , lightMap }; 
