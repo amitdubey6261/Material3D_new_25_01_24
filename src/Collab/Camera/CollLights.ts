@@ -20,10 +20,12 @@ const controlLight = (scene: THREE.Scene) => {
 
     toggleLamp.addEventListener('change', () => {
         if (toggleLamp.checked) {
+            pl.visible =true ; 
             intensityvalue = 5;
             lightMap.set('lamp_params', { switch: true, color: lamp1color, intensity: intensityvalue })
         }
         else {
+            pl.visible = false ; 
             intensityvalue = 0;
             lightMap.set('lamp_params', { switch: false, color: lamp1color, intensity: intensityvalue })
         }

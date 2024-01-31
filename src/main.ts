@@ -22,7 +22,7 @@ const progressContainer = document.querySelector('.spinner-container') as HTMLEl
 progressContainer.style.display = "block" ;
 let specificObject: THREE.Object3D | undefined;
 
-let pt_l : THREE.PointLight ; 
+// let pt_l : THREE.PointLight ; 
 
 // Function to add HDRI
 function setupHDRI() {
@@ -61,7 +61,6 @@ selectModelVariant(loadedModelsMap) ;
 // Function to load models one by one
 function loadModels(index: number) {
   if (index >= modelPaths.length) {
-    pt_l.visible = true ; 
     progressContainer.style.display = 'none';
     composer.setSize(window.innerWidth * 0.75, window.innerHeight);
     processJSON1(loadedModelsMap['Sofa'] , '.dynamic-mate' , ktx2loader ) ; 
@@ -122,7 +121,6 @@ function loadModels(index: number) {
 
         if ((child as THREE.Light).isLight) {
           let l = child as THREE.PointLight;
-          pt_l = l ; 
           l.visible = false ;
           l.castShadow = true;
           l.distance = 5;
