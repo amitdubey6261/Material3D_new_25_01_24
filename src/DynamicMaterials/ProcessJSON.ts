@@ -11,7 +11,7 @@ export const processJSON1 = (sofa : THREE.Object3D , className : string , ktx2lo
             elm.addEventListener('dragend', async (e: Event) => {
                 //@ts-ignore
                 const thumbnailSelected = e.target.getAttribute('data-variant');
-                alert(thumbnailSelected)
+                // alert(thumbnailSelected)
                 trigger1(thumbnailSelected) ; 
             })
         })
@@ -27,7 +27,7 @@ export const processJSON2 = (sofa : THREE.Object3D , className : string , ktx2Lo
             elm.addEventListener('dragend', async (e: Event) => {
                 //@ts-ignore
                 const thumbnailSelected = e.target.getAttribute('data-variant');
-                alert(thumbnailSelected)
+                // alert(thumbnailSelected)
                 trigger2(thumbnailSelected) ; 
             })
         })
@@ -44,7 +44,7 @@ export const processJSON3 = (sofa : THREE.Object3D , className : string , ktx2lo
             elm.addEventListener('dragend', async (e: Event) => {
                 //@ts-ignore
                 const thumbnailSelected = e.target.getAttribute('data-variant');
-                alert(thumbnailSelected)
+                // alert(thumbnailSelected)
                 trigger3(thumbnailSelected) ; 
             })
         })
